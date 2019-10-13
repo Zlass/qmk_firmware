@@ -724,9 +724,11 @@ bool process_record_quantum(keyrecord_t *record) {
 
 #if defined(BACKLIGHT_ENABLE) && defined(BACKLIGHT_BREATHING)
         case BL_BRTG: {
+            /*
             if (record->event.pressed) {
                 backlight_toggle_breathing();
             }
+	    */
             return false;
         }
 #endif
@@ -995,6 +997,7 @@ void matrix_scan_quantum() {
 
 #if defined(BACKLIGHT_ENABLE)
 #    if defined(LED_MATRIX_ENABLE)
+    // FIXME
     led_matrix_task();
 #    elif defined(BACKLIGHT_PIN)
     backlight_task();
@@ -1020,7 +1023,7 @@ void matrix_scan_quantum() {
     matrix_scan_kb();
 }
 #if defined(BACKLIGHT_ENABLE) && (defined(BACKLIGHT_PIN) || defined(BACKLIGHT_PINS))
-
+#    error this should not be hit right now FIXME remove
 // This logic is a bit complex, we support 3 setups:
 //
 //   1. Hardware PWM when backlight is wired to a PWM pin.
